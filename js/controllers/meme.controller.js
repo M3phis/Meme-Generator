@@ -10,9 +10,17 @@ function renderMeme(meme) {
   img.src = getImg(meme.imgId).url
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-  }
 
-  //place text in line
+    //place text in line
+    const line = meme.lines[meme.selectedLineIdx] // Get the selected line
+    gCtx.font = `${line.size}px Arial` // Set font size
+    gCtx.fillStyle = line.color // Set the color
+    console.log(line)
+    const x = gElCanvas.width / 2 - gCtx.measureText(line.txt).width / 2 // Center the text
+    const y = 50 // You can adjust the y position based on your layout
+
+    gCtx.fillText(line.txt, x, y)
+  }
 }
 
 function onImgSelect(id) {

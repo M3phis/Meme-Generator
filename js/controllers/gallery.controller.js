@@ -7,12 +7,11 @@ function renderGallery() {
 
   strHTML = imgs.map(
     (image) => `
-    <img src="${image.url}" alt="image">
+    <img src="${image.url}" alt="image"  onclick="onImgSelect(${image.id})">
     `
   )
 
   elGallery.innerHTML += strHTML.join('')
-  console.log(strHTML)
 }
 
 renderGallery()

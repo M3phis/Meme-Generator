@@ -22,3 +22,9 @@ let gImgs = [
 function getImgs() {
   return gImgs
 }
+
+function getImg(id) {
+  const img = gImgs.find((item) => item.id === id)
+
+  return img
+}

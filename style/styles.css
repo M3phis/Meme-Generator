@@ -80,6 +80,10 @@ canvas {
   grid-column: 2;
 }
 
+.saved-section {
+  grid-column: 2;
+}
+
 /* Control Panel */
 .control-panel {
   background-color: #2e2e2e;

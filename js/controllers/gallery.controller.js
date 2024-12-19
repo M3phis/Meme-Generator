@@ -11,7 +11,7 @@ function renderGallery() {
     `
   )
 
-  elGallery.innerHTML += strHTML
+  elGallery.innerHTML += strHTML.join('')
   console.log(strHTML)
 }
 

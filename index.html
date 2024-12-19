@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="style/styles.css" />
+    <link rel="stylesheet" href="style/basics/helpers.css" />
+  </head>
+  <body>
+    <main>
+      <header class="flex space-between">
+        <div class="header-logo">The Meme Forge</div>
+        <nav class="main-nav">
+          <ul class="clean-list flex space-between">
+            <li><a href="">Gallery</a></li>
+            <li><a href="">Saved</a></li>
+            <li><a href="">Randomize</a></li>
+          </ul>
+        </nav>
+      </header>
+      <section class="gallery-section">
+        Gallery
+
+        <div class="image-container"></div>
+      </section>
+
+      <section class="edit-section flex">
+        <div class="canvas-container">
+          <canvas width="480" height="480"></canvas>
+        </div>
+
+        <div class="control-panel">
+          <div class="input-group">
+            <input type="text" placeholder="Add Text Here" class="text-input" />
+          </div>
+          <div class="button-group">
+            <button class="red-btn">🗑</button>
+            <button class="green-btn">➕</button>
+            <button class="blue-btn">🔀</button>
+          </div>
+          <div class="formatting-group">
+            <button>🔤</button>
+            <button>🔡</button>
+            <button class="small-text">-A</button>
+            <button class="large-text">+A</button>
+            <select>
+              <option>TAHOMA</option>
+              <option>ARIAL</option>
+              <option>VERDANA</option>
+            </select>
+          </div>
+          <div class="action-group">
+            <button class="purple-btn">Download</button>
+            <button class="blue-btn">Save</button>
+            <button class="green-btn">Share</button>
+          </div>
+        </div>
+      </section>
+      <section class="saved-section">Saved</section>
+    </main>
+    <script src="js/services/gallery.service.js"></script>
+    <script src="js/services/meme.service.js"></script>
+    <script src="js/controllers/meme.controller.js"></script>
+    <script src="js/controllers/gallery.controller.js"></script>
+  </body>
+</html>

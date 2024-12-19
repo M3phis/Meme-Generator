@@ -1,0 +1,11 @@
+:root {
+  /* pallete */
+  --clr-primary-2: #f0f0f0;
+  --clr-primary-1: #b4ad9e;
+  --clr-primary: #626262;
+  --clr-primary1: #000;
+  --clr-onhover: #58c93a;
+
+  /* layout vars */
+  --layout-card-margin: 80px;
+}

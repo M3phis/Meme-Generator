@@ -1,0 +1,19 @@
+.layout-nav {
+  text-transform: uppercase;
+  font-family: 'Lato-Bold', sans-serif;
+  font-size: 1.125em;
+}
+
+.layout-nav span {
+  padding: 0.5rem;
+}
+
+.layout-nav a {
+  color: #8b8989;
+}
+
+.card-layout-footer {
+  padding-block: 1.6rem;
+  margin-bottom: 0;
+  border-top: 0.02rem solid lightgray;
+}

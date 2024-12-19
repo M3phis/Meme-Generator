@@ -15,3 +15,7 @@ function renderGallery() {
 }
 
 renderGallery()
+
+function hideGallery() {
+  document.querySelector('.gallery-section').style.display = 'none'
+}

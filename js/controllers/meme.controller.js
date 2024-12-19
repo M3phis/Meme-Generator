@@ -24,6 +24,7 @@ function renderMeme(meme) {
 }
 
 function onImgSelect(id) {
+  hideGallery()
   setImage(id)
   renderMeme(getMeme())
 }

@@ -28,3 +28,13 @@ function onImgSelect(id) {
   setImage(id)
   renderMeme(getMeme())
 }
+
+function onSetLineTxt(txt) {
+  setLineTxt(txt)
+  renderMeme(getMeme())
+}
+
+function onDownloadImg(elLink) {
+  const imgContent = gElCanvas.toDataURL('image/jpeg')
+  elLink.href = imgContent
+}

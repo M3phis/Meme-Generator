@@ -25,3 +25,7 @@ function setImage(id) {
   gMeme.imgId = id
   console.log('setting image with Id: ', id)
 }
+
+function setLineTxt(txt) {
+  gMeme.lines[0].txt = txt
+}

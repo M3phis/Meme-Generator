@@ -29,3 +29,18 @@ function setImage(id) {
 function setLineTxt(txt) {
   gMeme.lines[0].txt = txt
 }
+
+function setColor(color) {
+  gMeme.lines[0].color = color
+}
+
+const elTextInput = document.querySelector('.text-input')
+elTextInput.placeholder = `${getMeme().lines[0].txt}`
+
+function reduceFont() {
+  gMeme.lines[0].size -= 2
+}
+
+function increaseFont() {
+  gMeme.lines[0].size += 2
+}

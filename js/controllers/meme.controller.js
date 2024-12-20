@@ -1,4 +1,5 @@
 'use strict'
+
 const gElCanvas = document.querySelector('canvas')
 const gCtx = gElCanvas.getContext('2d')
 
@@ -37,4 +38,19 @@ function onSetLineTxt(txt) {
 function onDownloadImg(elLink) {
   const imgContent = gElCanvas.toDataURL('image/jpeg')
   elLink.href = imgContent
+}
+
+function onSetColor(color) {
+  setColor(color)
+  renderMeme(getMeme())
+}
+
+function onReduceFont() {
+  reduceFont()
+  renderMeme(getMeme())
+}
+
+function onIncreaseFont() {
+  increaseFont()
+  renderMeme(getMeme())
 }

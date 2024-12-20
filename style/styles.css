@@ -95,3 +95,8 @@ canvas {
   width: 40%;
   min-width: 300px;
 }
+
+.download-link {
+  text-decoration: none;
+  color: inherit;
+}

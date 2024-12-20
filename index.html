@@ -46,19 +46,20 @@
           <div class="formatting-group">
             <button>🔤</button>
             <button>🔡</button>
-            <button class="small-text">-A</button>
-            <button class="large-text">+A</button>
+            <button class="small-text" onclick="onReduceFont()">-A</button>
+            <button class="large-text" onclick="onIncreaseFont()">+A</button>
             <select>
               <option>TAHOMA</option>
               <option>ARIAL</option>
               <option>VERDANA</option>
             </select>
+            <input type="color" oninput="onSetColor(value)" />
           </div>
           <div class="action-group">
             <button class="purple-btn">
               <a
                 href="#"
-                class="btn"
+                class="btn download-link"
                 onclick="onDownloadImg(this)"
                 download="my-img.jpg"
                 >Download</a

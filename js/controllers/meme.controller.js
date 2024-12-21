@@ -43,6 +43,10 @@ function renderLine(line, meme) {
   const x = gElCanvas.width / 2 - textWidth / 2 // Center the text horizontally
   const y = 80 * (line.lineIndex + 1) // Adjust the y position based on layout
 
+  line.x = x
+  line.y = y - line.size // Adjust for top of text
+  line.width = textWidth
+  line.height = line.size
   // Draw the text
   gCtx.fillText(line.txt, x, y)
 
@@ -124,4 +128,24 @@ function hideEditor() {
 }
 function showEditor() {
   document.querySelector('.edit-section').style.display = 'flex'
+}
+
+function onClickCanvas(event) {
+  const { offsetX, offsetY } = event
+  console.log('I am in X: ', offsetX, 'And Y: ', offsetY)
+  console.log(getClickedLine(offsetX, offsetY))
+}
+
+function getClickedLine(x, y) {
+  const lines = getMeme().lines
+
+  const clickedLine = lines.filter((line) => {
+    return (
+      x > line.x &&
+      x <= line.x + line.width &&
+      y > line.y &&
+      y <= line.y + line.height
+    )
+  })
+  return clickedLine[0]
 }

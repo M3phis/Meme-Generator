@@ -1,0 +1,16 @@
+.gallery-section {
+  display: grid;
+  grid-template-columns: 1fr 800px 1fr;
+  grid-column: 2;
+}
+
+.image-container {
+  column-count: 4; /* Default to 4 columns */
+  column-gap: 16px; /* Space between columns */
+}
+
+.image-container img {
+  width: 100%;
+  margin-bottom: 16px; /* Space between images in a column */
+  display: block;
+}

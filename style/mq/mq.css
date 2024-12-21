@@ -1,0 +1,51 @@
+/* Large screens: Default (4 columns) */
+@media (min-width: 1201px) {
+  .image-container {
+    column-count: 4;
+  }
+}
+
+/* Medium screens: 3 columns */
+@media (max-width: 1200px) and (min-width: 801px) {
+  .image-container {
+    column-count: 3;
+  }
+
+  .image-container img {
+    /* Adjust image size for 3-column layout */
+  }
+}
+
+/* Small screens: 2 columns */
+
+/* Extra small screens: 1 column */
+@media (max-width: 800px) {
+  .image-container {
+    column-count: 1;
+    grid-column: 1;
+    width: 100%;
+  }
+  .gallery-section {
+    grid-column: 1;
+  }
+
+  .image-container img {
+    width: 98vw; /* Ensure the image adjusts to the column width */
+  }
+  .edit-section {
+    flex-direction: column;
+    grid-column: 1;
+  }
+  main {
+    grid-template-columns: 100%;
+  }
+  header {
+    grid-column: 1;
+  }
+  .saved-section {
+    grid-column: 1;
+  }
+}
+
+body {
+}

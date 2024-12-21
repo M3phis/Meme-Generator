@@ -65,12 +65,6 @@ function drawLineFrame(x, y, line) {
   gCtx.strokeRect(frameX, frameY, frameWidth, frameHeight)
 }
 
-function onImgSelect(id) {
-  hideGallery()
-  setImage(id)
-  renderMeme(getMeme())
-}
-
 function cleanLine(line) {
   // Calculate text position and dimensions
   const textWidth = gCtx.measureText(line.txt).width
@@ -123,4 +117,11 @@ function onAddLine() {
 function onSwitchLine() {
   switchLine()
   renderMeme(getMeme())
+}
+
+function hideEditor() {
+  document.querySelector('.edit-section').style.display = 'none'
+}
+function showEditor() {
+  document.querySelector('.edit-section').style.display = 'flex'
 }

@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="style/styles.css" />
     <link rel="stylesheet" href="style/basics/helpers.css" />
   </head>
-  <body>
+  <body onload="onInit()">
     <main>
       <header class="flex space-between">
         <div class="header-logo">The Meme Forge</div>
         <nav class="main-nav">
           <ul class="clean-list flex space-between">
-            <li><a href="">Gallery</a></li>
+            <li><a onclick="onReturnToGallery()">Gallery</a></li>
             <li><a href="">Saved</a></li>
             <li><a href="">Randomize</a></li>
           </ul>
@@ -74,6 +74,7 @@
       </section>
       <section class="saved-section">Saved</section>
     </main>
+    <script src="js/meme-generator.js"></script>
     <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/controllers/meme.controller.js"></script>

@@ -14,8 +14,10 @@ function renderGallery() {
   elGallery.innerHTML += strHTML.join('')
 }
 
-renderGallery()
-
 function hideGallery() {
   document.querySelector('.gallery-section').style.display = 'none'
+}
+
+function showGallery() {
+  document.querySelector('.gallery-section').style.display = 'grid'
 }

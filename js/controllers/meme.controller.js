@@ -133,7 +133,13 @@ function showEditor() {
 function onClickCanvas(event) {
   const { offsetX, offsetY } = event
   console.log('I am in X: ', offsetX, 'And Y: ', offsetY)
-  console.log(getClickedLine(offsetX, offsetY))
+  const clickedLine = getClickedLine(offsetX, offsetY)
+  if (clickedLine) {
+    switchToLine(clickedLine)
+    renderMeme(getMeme())
+  } else {
+    console.log('no line')
+  }
 }
 
 function getClickedLine(x, y) {

@@ -49,6 +49,11 @@ function switchLine() {
   gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
 }
 
+function switchToLine(line) {
+  gMeme.selectedLineIdx = line.lineIndex
+  console.log('switch to clicked line index:', line.lineIndex)
+}
+
 function setColor(color) {
   gMeme.lines[gMeme.selectedLineIdx].color = color
 }

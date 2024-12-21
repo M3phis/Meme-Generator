@@ -2,12 +2,14 @@
 
 let gMeme = {
   imgId: 5,
-  selectedLineIdx: 0,
-  lines: [{ txt: 'I sometimes eat Falafel', size: 20, color: 'red' }],
+  selectedLineIdx: 1,
+  lines: [
+    { txt: 'I sometimes eat Falafel', size: 20, color: 'red', lineIndex: 0 },
+    { txt: 'Who am I', size: 30, color: 'blue', lineIndex: 1 },
+  ],
 }
 
 function getMeme() {
-  console.log(gMeme)
   return gMeme
 }
 
@@ -21,26 +23,43 @@ function makeMeme(imgId, selectedLineIdx, lines) {
   return meme
 }
 
+function addLine(
+  line = {
+    txt: 'New Line',
+    size: 20,
+    color: 'red',
+  }
+) {
+  const newLineIndex = gMeme.lines.length //new line index
+  line.lineIndex = newLineIndex
+  gMeme.lines.push(line)
+  gMeme.selectedLineIdx = newLineIndex
+}
+
 function setImage(id) {
   gMeme.imgId = id
   console.log('setting image with Id: ', id)
 }
 
 function setLineTxt(txt) {
-  gMeme.lines[0].txt = txt
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+function switchLine() {
+  gMeme.selectedLineIdx = (gMeme.selectedLineIdx + 1) % gMeme.lines.length
 }
 
 function setColor(color) {
-  gMeme.lines[0].color = color
+  gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 const elTextInput = document.querySelector('.text-input')
 elTextInput.placeholder = `${getMeme().lines[0].txt}`
 
 function reduceFont() {
-  gMeme.lines[0].size -= 2
+  gMeme.lines[gMeme.selectedLineIdx].size -= 2
 }
 
 function increaseFont() {
-  gMeme.lines[0].size += 2
+  gMeme.lines[gMeme.selectedLineIdx].size += 2
 }

@@ -3,25 +3,66 @@
 const gElCanvas = document.querySelector('canvas')
 const gCtx = gElCanvas.getContext('2d')
 
-function renderMeme(meme) {
+async function renderMeme(meme) {
   //paint image on canvas
-  console.log('rendering meme: ', meme)
 
-  const img = new Image()
-  img.src = getImg(meme.imgId).url
-  img.onload = () => {
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+  await renderImage(meme.imgId)
 
-    //place text in line
-    const line = meme.lines[meme.selectedLineIdx] // Get the selected line
-    gCtx.font = `${line.size}px Arial` // Set font size
-    gCtx.fillStyle = line.color // Set the color
-    console.log(line)
-    const x = gElCanvas.width / 2 - gCtx.measureText(line.txt).width / 2 // Center the text
-    const y = 50 // You can adjust the y position based on your layout
+  const lines = meme.lines
 
-    gCtx.fillText(line.txt, x, y)
+  renderText(lines, meme)
+}
+
+function renderImage(imgId) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = getImg(imgId).url // Replace `getImg` with your image retrieval logic
+    img.onload = () => {
+      gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+      resolve() // Notify that the image has been rendered
+    }
+    img.onerror = (err) => reject(err) // Handle image loading errors
+  })
+}
+
+function renderText(lines, meme) {
+  lines.forEach((line) => {
+    renderLine(line, meme)
+  })
+}
+
+function renderLine(line, meme) {
+  console.log('rendering line')
+  gCtx.font = `${line.size}px Arial`
+  gCtx.fillStyle = line.color // Set the color
+
+  console.log(line)
+
+  // Calculate text position
+  const textWidth = gCtx.measureText(line.txt).width
+  const x = gElCanvas.width / 2 - textWidth / 2 // Center the text horizontally
+  const y = 80 * (line.lineIndex + 1) // Adjust the y position based on layout
+
+  // Draw the text
+  gCtx.fillText(line.txt, x, y)
+
+  if (getMeme().selectedLineIdx === line.lineIndex) {
+    // Draw a frame (rectangle) around the text
+    drawLineFrame(x, y, line)
   }
+}
+
+function drawLineFrame(x, y, line) {
+  const textWidth = gCtx.measureText(line.txt).width
+  const padding = 10 // Add some padding around the text
+  const frameX = x - padding / 2
+  const frameY = y - line.size - padding / 2 // Account for font size and padding
+  const frameWidth = textWidth + padding
+  const frameHeight = line.size + padding
+
+  gCtx.strokeStyle = 'black' // Frame color
+  gCtx.lineWidth = 2 // Frame line width
+  gCtx.strokeRect(frameX, frameY, frameWidth, frameHeight)
 }
 
 function onImgSelect(id) {
@@ -30,8 +71,25 @@ function onImgSelect(id) {
   renderMeme(getMeme())
 }
 
+function cleanLine(line) {
+  // Calculate text position and dimensions
+  const textWidth = gCtx.measureText(line.txt).width
+  const x = gElCanvas.width / 2 - textWidth / 2 // Center horizontally
+  const y = 80 * (line.lineIndex + 1) // Adjust vertically based on index
+
+  const padding = 10 // Padding around the text
+  const clearX = x - padding / 2
+  const clearY = y - line.size - padding / 2
+  const clearWidth = textWidth + padding
+  const clearHeight = line.size + padding
+
+  // Clear the area of the text
+  gCtx.clearRect(clearX, clearY, clearWidth, clearHeight)
+}
+
 function onSetLineTxt(txt) {
   setLineTxt(txt)
+
   renderMeme(getMeme())
 }
 
@@ -52,5 +110,17 @@ function onReduceFont() {
 
 function onIncreaseFont() {
   increaseFont()
+  renderMeme(getMeme())
+}
+
+function onAddLine() {
+  console.log('adding line')
+  addLine()
+  renderMeme(getMeme())
+  console.log(getMeme())
+}
+
+function onSwitchLine() {
+  switchLine()
   renderMeme(getMeme())
 }

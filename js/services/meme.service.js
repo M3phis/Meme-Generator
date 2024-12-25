@@ -27,6 +27,8 @@ let gMeme = {
   ],
 }
 
+let gMemes = getSavedMemes()
+
 function getMeme() {
   return gMeme
 }
@@ -157,4 +159,27 @@ function getRandomMeme() {
       },
     ],
   }
+}
+
+function saveMeme() {
+  let savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || []
+
+  const memeImage = gElCanvas.toDataURL('image/png')
+
+  const memeToSave = { ...getMeme(), image: memeImage }
+
+  savedMemes.push(memeToSave)
+
+  localStorage.setItem('savedMemes', JSON.stringify(savedMemes))
+
+  console.log('Meme saved to local storage:', memeToSave)
+}
+
+function getSavedMemes() {
+  const savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || []
+  return savedMemes
+}
+
+function loadSaveMemes() {
+  console.log(gMemes)
 }

@@ -15,7 +15,7 @@
         <nav class="main-nav">
           <ul class="clean-list flex space-around">
             <li><a onclick="onReturnToGallery()">Gallery</a></li>
-            <li><a href="">Saved</a></li>
+            <li><a onclick="onGoToSaved()">Saved</a></li>
             <li><a onclick="onRandomMeme()">Randomize</a></li>
           </ul>
         </nav>
@@ -90,12 +90,12 @@
                 >Download</a
               >
             </button>
-            <button class="blue-btn">Save</button>
+            <button class="blue-btn" onclick="onSaveMeme()">Save</button>
             <button class="green-btn">Share</button>
           </div>
         </div>
       </section>
-      <section class="saved-section">Saved</section>
+      <section class="saved-section"></section>
     </main>
     <script src="js/util/util.js"></script>
     <script src="js/meme-generator.js"></script>

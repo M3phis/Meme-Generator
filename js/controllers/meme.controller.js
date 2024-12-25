@@ -26,7 +26,7 @@ function renderImage(imgId) {
 }
 
 function renderText(lines, meme) {
-  console.log('rendering text for y: ', gMeme.lines[gMeme.selectedLineIdx].y)
+  //   console.log('rendering text for y: ', gMeme.lines[gMeme.selectedLineIdx].y)
 
   lines.forEach((line) => {
     renderLine(line, meme)
@@ -34,13 +34,13 @@ function renderText(lines, meme) {
 }
 
 function renderLine(line, meme) {
-  console.log('rendering line')
+  //   console.log('rendering line')
   gCtx.font = `${line.size}px ${line.font}`
   gCtx.fillStyle = line.color // Set the color
   gCtx.textAlign = `${line.textAlignment}`
   gCtx.textBaseline = 'middle'
 
-  console.log(line)
+  //   console.log(line)
 
   // Calculate text position
   const textWidth = gCtx.measureText(line.txt).width
@@ -165,17 +165,11 @@ function onSwitchLine() {
   renderMeme(getMeme())
 }
 
-function hideEditor() {
-  document.querySelector('.edit-section').style.display = 'none'
-}
-function showEditor() {
-  document.querySelector('.edit-section').style.display = 'flex'
-}
-
 function onClickCanvas(event) {
   const { offsetX, offsetY } = event
   console.log('I am in X: ', offsetX, 'And Y: ', offsetY)
   const clickedLine = getClickedLine(offsetX, offsetY)
+  console.log('clicked on line: ', clickedLine)
   if (clickedLine) {
     switchToLine(clickedLine)
     renderMeme(getMeme())
@@ -230,4 +224,40 @@ function onMoveLineUp() {
 function onDeleteLine() {
   deleteLine()
   renderMeme(getMeme())
+}
+
+function onSaveMeme() {
+  saveMeme()
+  console.log('saved memes: ', getSavedMemes())
+}
+
+function hideEditor() {
+  document.querySelector('.edit-section').style.display = 'none'
+}
+function showEditor() {
+  document.querySelector('.edit-section').style.display = 'flex'
+}
+
+function hideSaved() {
+  document.querySelector('.saved-section').style.display = 'none'
+}
+
+function showSaved() {
+  document.querySelector('.saved-section').style.display = 'flex'
+  renderSavedMemes()
+}
+
+function renderSavedMemes() {
+  const elSavedSection = document.querySelector('.saved-section')
+
+  const savedMemes = getSavedMemes()
+  console.log('saved memes let me show you:', savedMemes)
+  let strHTML
+
+  strHTML = savedMemes.map(
+    (meme) => `
+    <img src="${meme.image}" alt="image"  >
+  `
+  )
+  elSavedSection.innerHTML = strHTML.join('')
 }

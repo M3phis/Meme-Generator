@@ -36,6 +36,9 @@
     flex-direction: column;
     grid-column: 1;
   }
+  .saved-section {
+    grid-column: 1;
+  }
   main {
     grid-template-columns: 100%;
   }

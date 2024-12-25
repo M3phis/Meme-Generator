@@ -3,6 +3,7 @@
 function onInit() {
   renderGallery()
   hideEditor()
+  hideSaved()
 }
 
 function onImgSelect(id) {
@@ -15,6 +16,7 @@ function onImgSelect(id) {
 function onReturnToGallery() {
   hideEditor()
   showGallery()
+  hideSaved()
 }
 
 function onRandomMeme() {
@@ -23,6 +25,14 @@ function onRandomMeme() {
   setMeme(meme)
   renderMeme(meme)
   hideGallery()
-
+  hideSaved()
   showEditor()
+}
+
+function onGoToSaved() {
+  loadSaveMemes()
+  console.log('???')
+  hideGallery()
+  hideEditor()
+  showSaved()
 }

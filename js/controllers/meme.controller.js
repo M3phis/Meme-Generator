@@ -35,35 +35,48 @@ function renderLine(line, meme) {
   console.log('rendering line')
   gCtx.font = `${line.size}px Arial`
   gCtx.fillStyle = line.color // Set the color
+  gCtx.textAlign = `${line.textAlignment}`
+  gCtx.textBaseline = 'middle'
 
   console.log(line)
 
   // Calculate text position
   const textWidth = gCtx.measureText(line.txt).width
-  const x = gElCanvas.width / 2 - textWidth / 2 // Center the text horizontally
+  const x = gElCanvas.width / 2 // Center the text horizontally
   const y = 80 * (line.lineIndex + 1) // Adjust the y position based on layout
 
   line.x = x
   line.y = y - line.size // Adjust for top of text
   line.width = textWidth
   line.height = line.size
+
   // Draw the text
   gCtx.fillText(line.txt, x, y)
 
   if (getMeme().selectedLineIdx === line.lineIndex) {
     // Draw a frame (rectangle) around the text
-    drawLineFrame(x, y, line)
+    drawLineFrame(line)
   }
 }
-
-function drawLineFrame(x, y, line) {
-  const textWidth = gCtx.measureText(line.txt).width
+function drawLineFrame(line) {
   const padding = 10 // Add some padding around the text
-  const frameX = x - padding / 2
-  const frameY = y - line.size - padding / 2 // Account for font size and padding
-  const frameWidth = textWidth + padding
-  const frameHeight = line.size + padding
+  let frameX
 
+  // Adjust the starting x-coordinate based on text alignment
+  if (line.textAlignment === 'start') {
+    frameX = line.x - padding / 2
+  } else if (line.textAlignment === 'center') {
+    frameX = line.x - line.width / 2 - padding / 2
+  } else if (line.textAlignment === 'end') {
+    frameX = line.x - line.width - padding / 2
+  }
+
+  // Calculate frame dimensions
+  const frameY = line.y - -padding / 2 // Account for vertical centering and padding
+  const frameWidth = line.width + padding
+  const frameHeight = line.height + padding
+
+  // Draw the frame
   gCtx.strokeStyle = 'black' // Frame color
   gCtx.lineWidth = 2 // Frame line width
   gCtx.strokeRect(frameX, frameY, frameWidth, frameHeight)
@@ -111,6 +124,28 @@ function onIncreaseFont() {
   renderMeme(getMeme())
 }
 
+function onTextAlignLeft() {
+  console.log('aligning left')
+  const meme = getMeme()
+  const line = meme.lines[meme.selectedLineIdx]
+  textAlignLeft(line)
+  renderMeme(meme)
+}
+
+function onTextAlignRight() {
+  const meme = getMeme()
+  const line = meme.lines[meme.selectedLineIdx]
+  textAlignRight(line)
+  renderMeme(meme)
+}
+
+function onTextAlignCenter() {
+  const meme = getMeme()
+  const line = meme.lines[meme.selectedLineIdx]
+  textAlignCenter(line)
+  renderMeme(meme)
+}
+
 function onAddLine() {
   console.log('adding line')
   addLine()
@@ -146,12 +181,25 @@ function getClickedLine(x, y) {
   const lines = getMeme().lines
 
   const clickedLine = lines.filter((line) => {
+    let startX
+
+    // Adjust starting x-coordinate based on text alignment
+    if (line.textAlignment === 'start') {
+      startX = line.x
+    } else if (line.textAlignment === 'center') {
+      startX = line.x - line.width / 2
+    } else if (line.textAlignment === 'end') {
+      startX = line.x + line.width
+    }
+
+    // Check if the click is within the line's bounding box
     return (
-      x > line.x &&
-      x <= line.x + line.width &&
-      y > line.y &&
+      x > startX &&
+      x <= startX + line.width &&
+      y > line.y - line.height / 2 &&
       y <= line.y + line.height
     )
   })
+
   return clickedLine[0]
 }

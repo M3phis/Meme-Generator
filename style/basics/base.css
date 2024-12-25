@@ -13,3 +13,8 @@ body {
 .saved-section {
   display: none;
 }
+
+button img {
+  width: 20px;
+  height: 20px;
+}

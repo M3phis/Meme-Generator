@@ -189,7 +189,7 @@ function getClickedLine(x, y) {
     } else if (line.textAlignment === 'center') {
       startX = line.x - line.width / 2
     } else if (line.textAlignment === 'end') {
-      startX = line.x + line.width
+      startX = line.x - line.width
     }
 
     // Check if the click is within the line's bounding box

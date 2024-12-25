@@ -33,7 +33,7 @@ function renderText(lines, meme) {
 
 function renderLine(line, meme) {
   console.log('rendering line')
-  gCtx.font = `${line.size}px Arial`
+  gCtx.font = `${line.size}px ${line.font}`
   gCtx.fillStyle = line.color // Set the color
   gCtx.textAlign = `${line.textAlignment}`
   gCtx.textBaseline = 'middle'
@@ -202,4 +202,9 @@ function getClickedLine(x, y) {
   })
 
   return clickedLine[0]
+}
+
+function onSetFontFamily(font) {
+  setFamilyFont(font)
+  renderMeme(getMeme())
 }

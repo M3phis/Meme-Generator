@@ -55,10 +55,10 @@
             <button>🔡</button>
             <button class="small-text" onclick="onReduceFont()">-A</button>
             <button class="large-text" onclick="onIncreaseFont()">+A</button>
-            <select>
-              <option>TAHOMA</option>
-              <option>ARIAL</option>
-              <option>VERDANA</option>
+            <select onchange="onSetFontFamily(value)">
+              <option value="Tahoma">TAHOMA</option>
+              <option value="Arial">ARIAL</option>
+              <option value="Verdana">VERDANA</option>
             </select>
             <input type="color" oninput="onSetColor(value)" />
             <div class="text-align-buttons">

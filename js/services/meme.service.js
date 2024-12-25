@@ -10,6 +10,7 @@ let gMeme = {
       color: 'red',
       lineIndex: 0,
       textAlignment: 'center',
+      font: 'Arial',
     },
     {
       txt: 'Who am I',
@@ -17,6 +18,7 @@ let gMeme = {
       color: 'blue',
       lineIndex: 1,
       textAlignment: 'center',
+      font: 'Verdana',
     },
   ],
 }
@@ -41,6 +43,7 @@ function addLine(
     size: 20,
     color: 'red',
     textAlignment: 'center',
+    font: 'Arial',
   }
 ) {
   const newLineIndex = gMeme.lines.length //new line index
@@ -92,4 +95,8 @@ function textAlignRight(line) {
 
 function textAlignCenter(line) {
   line.textAlignment = 'center'
+}
+
+function setFamilyFont(font) {
+  gMeme.lines[gMeme.selectedLineIdx].font = font
 }

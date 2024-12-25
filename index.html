@@ -16,7 +16,7 @@
           <ul class="clean-list flex space-around">
             <li><a onclick="onReturnToGallery()">Gallery</a></li>
             <li><a href="">Saved</a></li>
-            <li><a href="">Randomize</a></li>
+            <li><a onclick="onRandomMeme()">Randomize</a></li>
           </ul>
         </nav>
       </header>
@@ -72,6 +72,13 @@
                 <img src="imgs/text-align/align-right.png" alt="" />
               </button>
             </div>
+            <div class="move-line-buttons">
+              <button class="move-up" onclick="onMoveLineUp()">⬆️</button>
+              <button class="move-down" onclick="onMoveLineDown()">⬇️</button>
+              <button class="red-btn" onclick="onDeleteLine()">
+                Delete Line
+              </button>
+            </div>
           </div>
           <div class="action-group">
             <button class="purple-btn">
@@ -90,6 +97,7 @@
       </section>
       <section class="saved-section">Saved</section>
     </main>
+    <script src="js/util/util.js"></script>
     <script src="js/meme-generator.js"></script>
     <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>

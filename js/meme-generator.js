@@ -16,3 +16,13 @@ function onReturnToGallery() {
   hideEditor()
   showGallery()
 }
+
+function onRandomMeme() {
+  const meme = getRandomMeme()
+  console.log('random meme: ', meme)
+  setMeme(meme)
+  renderMeme(meme)
+  hideGallery()
+
+  showEditor()
+}

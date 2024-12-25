@@ -26,6 +26,8 @@ function renderImage(imgId) {
 }
 
 function renderText(lines, meme) {
+  console.log('rendering text for y: ', gMeme.lines[gMeme.selectedLineIdx].y)
+
   lines.forEach((line) => {
     renderLine(line, meme)
   })
@@ -42,11 +44,16 @@ function renderLine(line, meme) {
 
   // Calculate text position
   const textWidth = gCtx.measureText(line.txt).width
-  const x = gElCanvas.width / 2 // Center the text horizontally
-  const y = 80 * (line.lineIndex + 1) // Adjust the y position based on layout
+  let x = line.x // Center the text horizontally
+  if (line.textAlignment === 'center') {
+    x = gElCanvas.width / 2
+  } else if (line.textAlignment === 'end') {
+    x = gElCanvas.width - line.width / 2
+  }
+  const y = line.y // Adjust the y position based on layout
 
-  line.x = x
-  line.y = y - line.size // Adjust for top of text
+  //   line.x = x
+  //   line.y = y - line.size // Adjust for top of text
   line.width = textWidth
   line.height = line.size
 
@@ -60,7 +67,7 @@ function renderLine(line, meme) {
 }
 function drawLineFrame(line) {
   const padding = 10 // Add some padding around the text
-  let frameX
+  let frameX = line.x
 
   // Adjust the starting x-coordinate based on text alignment
   if (line.textAlignment === 'start') {
@@ -72,7 +79,7 @@ function drawLineFrame(line) {
   }
 
   // Calculate frame dimensions
-  const frameY = line.y - -padding / 2 // Account for vertical centering and padding
+  const frameY = line.y - line.height / 2 // Account for vertical centering and padding
   const frameWidth = line.width + padding
   const frameHeight = line.height + padding
 
@@ -206,5 +213,21 @@ function getClickedLine(x, y) {
 
 function onSetFontFamily(font) {
   setFamilyFont(font)
+  renderMeme(getMeme())
+}
+
+function onMoveLineDown() {
+  console.log('goiung down')
+  moveLineDown()
+  renderMeme(getMeme())
+}
+
+function onMoveLineUp() {
+  moveLineUp()
+  renderMeme(getMeme())
+}
+
+function onDeleteLine() {
+  deleteLine()
   renderMeme(getMeme())
 }

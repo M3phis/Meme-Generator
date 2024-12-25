@@ -11,6 +11,8 @@ let gMeme = {
       lineIndex: 0,
       textAlignment: 'center',
       font: 'Arial',
+      x: 240,
+      y: 60,
     },
     {
       txt: 'Who am I',
@@ -19,12 +21,18 @@ let gMeme = {
       lineIndex: 1,
       textAlignment: 'center',
       font: 'Verdana',
+      x: 240,
+      y: 130,
     },
   ],
 }
 
 function getMeme() {
   return gMeme
+}
+
+function setMeme(meme) {
+  gMeme = meme
 }
 
 function makeMeme(imgId, selectedLineIdx, lines) {
@@ -42,8 +50,11 @@ function addLine(
     txt: 'New Line',
     size: 20,
     color: 'red',
+    lineIndex: gMeme.lines.length,
     textAlignment: 'center',
     font: 'Arial',
+    x: 240,
+    y: 60,
   }
 ) {
   const newLineIndex = gMeme.lines.length //new line index
@@ -99,4 +110,51 @@ function textAlignCenter(line) {
 
 function setFamilyFont(font) {
   gMeme.lines[gMeme.selectedLineIdx].font = font
+}
+
+function moveLineDown() {
+  console.log(gMeme.lines[gMeme.selectedLineIdx].y)
+  gMeme.lines[gMeme.selectedLineIdx].y += 20
+  console.log(gMeme.lines[gMeme.selectedLineIdx].y)
+}
+
+function moveLineUp() {
+  console.log(gMeme.lines[gMeme.selectedLineIdx].y)
+  gMeme.lines[gMeme.selectedLineIdx].y -= 20
+  console.log(gMeme.lines[gMeme.selectedLineIdx].y)
+}
+
+function deleteLine() {
+  const newLines = gMeme.lines.filter((line) => {
+    return line.lineIndex !== gMeme.selectedLineIdx
+  })
+  console.log('lines after delete:', newLines)
+  gMeme.lines = newLines
+  gMeme.selectedLineIdx = gMeme.lines[0].lineIndex
+  updateLinesIndex()
+}
+
+function updateLinesIndex() {
+  for (let i = 0; i < gMeme.lines.length; i++) {
+    gMeme.lines[i].lineIndex = i
+  }
+}
+
+function getRandomMeme() {
+  return {
+    imgId: getRandomInt(1, getImgs().length),
+    selectedLineIdx: 0,
+    lines: [
+      {
+        txt: 'random text',
+        size: 20,
+        color: 'red',
+        lineIndex: 0,
+        textAlignment: 'center',
+        font: 'Arial',
+        x: 240,
+        y: 60,
+      },
+    ],
+  }
 }

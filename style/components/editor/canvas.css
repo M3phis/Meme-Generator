@@ -3,8 +3,11 @@
   max-width: 800px;
   display: flex;
   justify-content: center;
+  /* align-items: center; */
 }
+
 canvas {
-  max-width: 100%;
-  height: auto;
+  /* max-width: 80%;
+  height: 80%;
+  border-radius: 5px 5px 5px 5px; */
 }

@@ -51,3 +51,7 @@ header {
 .main-nav a.active {
   color: orange;
 }
+
+.btn-toggle-menu {
+  display: none;
+}

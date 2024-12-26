@@ -345,7 +345,7 @@ function onUploadImg(ev) {
   // After a succesful upload, allow the user to share on Facebook
   function onSuccess(uploadedImgUrl) {
     const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-    console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
+    // console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`
     )

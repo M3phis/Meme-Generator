@@ -39,3 +39,12 @@ function _filterImgs(gQueryOptions) {
 
   return imgs
 }
+
+function addImg(img) {
+  console.log(img.src)
+  gImgs.unshift({
+    id: gImgs.length + 1,
+    url: img.src,
+    keywords: ['funny', 'cartoon'],
+  })
+}

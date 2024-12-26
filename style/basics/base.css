@@ -7,7 +7,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif; /* Default font */
-  color: red;
+  color: #989898;
+  background-color: #f3f1f1;
 }
 
 button img {

@@ -1,10 +1,23 @@
 main {
   display: grid;
-  grid-template-columns: 1fr 800px 1fr;
+  grid-template-rows: 50px 1fr;
+  gap: 30px;
 }
 
 header {
-  grid-column: 2;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.gallery-section,
+.edit-section {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+/*
+header {
+  grid-row: 1;
   width: 100%;
   height: 100px;
   display: grid;
@@ -17,7 +30,6 @@ header > * {
 
 .image-container {
   column-count: 4;
-  grid-column: 2;
   grid-row: 2;
 }
 
@@ -28,14 +40,14 @@ canvas {
 .gallery-section {
   display: grid;
   grid-template-columns: 1fr 800px 1fr;
-  grid-column: 2;
+  grid-column: 1;
   grid-template-rows: 100px 1fr;
 }
 
 .edit-section {
-  grid-column: 2;
+  grid-column: 1;
 }
 
 .saved-section {
-  grid-column: 2;
-}
+  grid-column: 1;
+} */

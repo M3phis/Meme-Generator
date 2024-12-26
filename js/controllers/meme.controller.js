@@ -304,7 +304,7 @@ function hideSaved() {
 }
 
 function showSaved() {
-  document.querySelector('.saved-section').style.display = 'flex'
+  document.querySelector('.saved-section').style.display = 'grid'
   renderSavedMemes()
 }
 

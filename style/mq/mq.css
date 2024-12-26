@@ -1,14 +1,12 @@
 /* Large screens: Default (4 columns) */
 @media (min-width: 1201px) {
   .image-container {
-    column-count: 4;
   }
 }
 
 /* Medium screens: 3 columns */
 @media (max-width: 1200px) and (min-width: 801px) {
   .image-container {
-    column-count: 3;
   }
 
   .image-container img {
@@ -37,7 +35,6 @@
     grid-column: 1;
   }
   .saved-section {
-    grid-column: 1;
   }
   main {
     grid-template-columns: 100%;

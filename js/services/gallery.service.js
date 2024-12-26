@@ -17,6 +17,8 @@ let gImgs = [
   { id: 16, url: 'imgs/meme-imgs/16.jpg', keywords: ['funny', 'tv'] },
   { id: 17, url: 'imgs/meme-imgs/17.jpg', keywords: ['funny', 'politic'] },
   { id: 18, url: 'imgs/meme-imgs/18.jpg', keywords: ['funny', 'cartoon'] },
+  { id: 19, url: 'imgs/meme-imgs/diff.jpg', keywords: ['funny', 'cartoon'] },
+  { id: 20, url: 'imgs/meme-imgs/drevil.jpg', keywords: ['funny', 'cartoon'] },
 ]
 
 function getImgs(gQueryOptions) {

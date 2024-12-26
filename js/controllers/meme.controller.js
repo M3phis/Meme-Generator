@@ -18,23 +18,57 @@ function renderStickers(stickers) {
   elStickers.innerHTML = strHTML.join('')
 }
 
+function initCanvas(img) {
+  const container = document.querySelector('.canvas-container')
+  const containerWidth = container.clientWidth
+
+  // Calculate new dimensions while maintaining aspect ratio
+  const aspectRatio = img.width / img.height
+  let canvasWidth = containerWidth
+  let canvasHeight = containerWidth / aspectRatio
+
+  // Set maximum dimensions if needed
+  const maxHeight = window.innerHeight * 0.8
+  if (canvasHeight > maxHeight) {
+    canvasHeight = maxHeight
+    canvasWidth = maxHeight * aspectRatio
+  }
+
+  // Update canvas dimensions
+  gElCanvas.width = canvasWidth
+  gElCanvas.height = canvasHeight
+
+  return { width: canvasWidth, height: canvasHeight }
+}
+
 async function renderMeme(meme) {
   //paint image on canvas
 
-  await renderImage(meme.imgId)
+  const { width, height } = await renderImage(meme.imgId)
+
+  const scaleX = width / 480
+  const scaleY = height / 480
 
   const lines = meme.lines
 
-  renderText(lines, meme)
+  const scaledLines = meme.lines.map((line) => ({
+    ...line,
+    x: line.x * scaleX,
+    y: line.y * scaleY,
+    size: line.size * Math.min(scaleX, scaleY),
+  }))
+
+  renderText(scaledLines, meme)
 }
 
 function renderImage(imgId) {
   return new Promise((resolve, reject) => {
     const img = new Image()
-    img.src = getImg(imgId).url // Replace `getImg` with your image retrieval logic
+    img.src = getImg(imgId).url
     img.onload = () => {
-      gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-      resolve() // Notify that the image has been rendered
+      const dimensions = initCanvas(img)
+      gCtx.drawImage(img, 0, 0, dimensions.width, dimensions.height)
+      resolve(dimensions) // Notify that the image has been rendered
     }
     img.onerror = (err) => reject(err) // Handle image loading errors
   })
@@ -196,29 +230,39 @@ function onClickCanvas(event) {
 }
 
 function getClickedLine(x, y) {
+  console.log('clicked on: x: ', x, 'and y: ', y)
   const lines = getMeme().lines
+
+  const scaleX = gElCanvas.width / 480
+  const scaleY = gElCanvas.height / 480
 
   const clickedLine = lines.filter((line) => {
     let startX
 
+    const lineWidth = gCtx.measureText(line.txt).width
+
+    const scaledLineX = line.x * scaleX
+    const scaledLineY = line.y * scaleY
+    const scaledWidth = lineWidth * scaleX
+    const scaledHeight = line.size * scaleY
     // Adjust starting x-coordinate based on text alignment
     if (line.textAlignment === 'start') {
-      startX = line.x
+      startX = scaledLineX
     } else if (line.textAlignment === 'center') {
-      startX = line.x - line.width / 2
+      startX = scaledLineX - scaledWidth / 2
     } else if (line.textAlignment === 'end') {
-      startX = line.x - line.width
+      startX = scaledLineX - scaledWidth
     }
 
     // Check if the click is within the line's bounding box
+
     return (
       x > startX &&
-      x <= startX + line.width &&
-      y > line.y - line.height / 2 &&
-      y <= line.y + line.height
+      x <= startX + scaledWidth &&
+      y > scaledLineY - scaledHeight / 2 &&
+      y <= scaledLineY + scaledHeight
     )
   })
-
   return clickedLine[0]
 }
 

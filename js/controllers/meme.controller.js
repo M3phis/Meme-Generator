@@ -181,9 +181,11 @@ function onSwitchLine() {
 }
 
 function onClickCanvas(event) {
-  const { offsetX, offsetY } = event
-  console.log('I am in X: ', offsetX, 'And Y: ', offsetY)
-  const clickedLine = getClickedLine(offsetX, offsetY)
+  console.log('onClickCanvas triggered', event) // Debug log to verify function is called
+
+  const pos = getEvPos(event)
+  //   console.log('I am in X: ', offsetX, 'And Y: ', offsetY)
+  const clickedLine = getClickedLine(pos.x, pos.y)
   console.log('clicked on line: ', clickedLine)
   if (clickedLine) {
     switchToLine(clickedLine)
@@ -334,4 +336,19 @@ function onMove(ev) {
 function onUp() {
   setLineDrag(false)
   document.body.style.cursor = 'default'
+}
+
+function onUploadImg(ev) {
+  ev.preventDefault()
+  const canvasData = gElCanvas.toDataURL('image/jpeg')
+
+  // After a succesful upload, allow the user to share on Facebook
+  function onSuccess(uploadedImgUrl) {
+    const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+    console.log('encodedUploadedImgUrl:', encodedUploadedImgUrl)
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`
+    )
+  }
+  uploadImg(canvasData, onSuccess)
 }

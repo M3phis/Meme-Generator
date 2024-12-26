@@ -96,7 +96,10 @@
               >
             </button>
             <button class="blue-btn" onclick="onSaveMeme()">Save</button>
-            <button class="green-btn">Share</button>
+            <button class="green-btn share-btn" onclick="onUploadImg(event)">
+              Share
+            </button>
+            <div class="share-container"></div>
           </div>
         </div>
       </section>
@@ -104,6 +107,7 @@
     </main>
     <script src="js/util/util.js"></script>
     <script src="js/meme-generator.js"></script>
+    <script src="js/services/upload.service.js"></script>
     <script src="js/services/gallery.service.js"></script>
     <script src="js/services/meme.service.js"></script>
     <script src="js/controllers/meme.controller.js"></script>

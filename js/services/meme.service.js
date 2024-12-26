@@ -3,6 +3,7 @@
 const gStickers = ['😜', '😢', '🤮', '🙊', '💀', '🤡']
 
 let gMeme = {
+  isDrag: false,
   imgId: 5,
   selectedLineIdx: 1,
   lines: [
@@ -169,6 +170,7 @@ function getRandomMeme() {
     selectedLineIdx: 0,
     lines: [
       {
+        isDrag: false,
         txt: 'random text',
         size: 20,
         color: 'red',
@@ -207,4 +209,18 @@ function loadSaveMemes() {
 
 function getStickers() {
   return gStickers
+}
+
+function setLineDrag(isDrag) {
+  gMeme.isDrag = isDrag
+}
+
+function moveLine(dx, dy, line) {
+  console.log('dx: ', dx)
+  console.log('dy: ', dy)
+  if (!line) return
+  //   console.log('line x,y before changes: ', line.x, line.y)
+  line.x += dx
+  line.y += dy
+  //   console.log('line x,y AFTER changes: ', line.x, line.y)
 }

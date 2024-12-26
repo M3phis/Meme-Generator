@@ -2,8 +2,9 @@
 
 const gElCanvas = document.querySelector('canvas')
 const gCtx = gElCanvas.getContext('2d')
-
+let gStartPos
 const elStickers = document.querySelector('.stickers')
+let currClickedLine
 // elStickers.innerHTML = getStickers().join('')
 
 function renderStickers(stickers) {
@@ -59,11 +60,11 @@ function renderLine(line, meme) {
   // Calculate text position
   const textWidth = gCtx.measureText(line.txt).width
   let x = line.x // Center the text horizontally
-  if (line.textAlignment === 'center') {
-    x = gElCanvas.width / 2
-  } else if (line.textAlignment === 'end') {
-    x = gElCanvas.width - line.width / 2
-  }
+  //   if (line.textAlignment === 'center') {
+  //     x = gElCanvas.width / 2
+  //   } else if (line.textAlignment === 'end') {
+  //     x = gElCanvas.width - line.width / 2
+  //   }
   const y = line.y // Adjust the y position based on layout
 
   //   line.x = x
@@ -279,4 +280,58 @@ function renderSavedMemes() {
 function onAddSticker(sticker) {
   addStickerLine(sticker)
   renderMeme(getMeme())
+}
+
+///get drag and drop working
+
+function addMouseListeners() {
+  gElCanvas.addEventListener('mousedown', onDown)
+  gElCanvas.addEventListener('mousemove', onMove)
+  gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+  gElCanvas.addEventListener('touchstart', onDown)
+  gElCanvas.addEventListener('touchmove', onMove)
+  gElCanvas.addEventListener('touchend', onUp)
+}
+
+function onDown(ev) {
+  // Get the ev pos from mouse or touch
+  console.log('On down')
+  const pos = getEvPos(ev)
+  // console.log('pos', pos)
+  if (!getClickedLine(pos.x, pos.y)) {
+    console.log('no line selected')
+    return
+  }
+
+  console.log('I am clicking a line')
+  setLineDrag(true)
+  currClickedLine = getClickedLine(pos.x, pos.y)
+
+  //Save the pos we start from
+  gStartPos = pos
+  document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+  const { isDrag } = getMeme()
+  if (!isDrag) return
+  //   console.log('Moving the Line')
+
+  const pos = getEvPos(ev)
+  // Calc the delta, the diff we moved
+  const dx = pos.x - gStartPos.x
+  const dy = pos.y - gStartPos.y
+  moveLine(dx, dy, currClickedLine)
+  // Save the last pos, we remember where we`ve been and move accordingly
+  gStartPos = pos
+  // The canvas is render again after every move
+  renderMeme(getMeme())
+}
+
+function onUp() {
+  setLineDrag(false)
+  document.body.style.cursor = 'default'
 }

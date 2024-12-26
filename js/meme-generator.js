@@ -4,6 +4,8 @@ function onInit() {
   renderGallery()
   hideEditor()
   hideSaved()
+  addTouchListeners()
+  addMouseListeners()
 }
 
 function onImgSelect(id) {

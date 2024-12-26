@@ -10,6 +10,7 @@
 @import url('./components/canvas.css');
 @import url('./components/gallery.css');
 @import url('./components/saved.css');
+@import url('./components/stickers.css');
 
 /* Import Media Queries */
 @import url('./mq/mq.css');

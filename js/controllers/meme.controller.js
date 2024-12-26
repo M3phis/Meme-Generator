@@ -252,12 +252,12 @@ function renderSavedMemes() {
 
   const savedMemes = getSavedMemes()
   console.log('saved memes let me show you:', savedMemes)
-  let strHTML
 
-  strHTML = savedMemes.map(
-    (meme) => `
-    <img src="${meme.image}" alt="image"  >
-  `
-  )
+  const strHTML = savedMemes.map((meme) => {
+    const memeData = JSON.stringify(meme).replace(/"/g, '&quot;') // Escape quotes for HTML
+    return `
+      <img src="${meme.image}" alt="Saved meme" onclick="onMemeSelect('${memeData}')">
+    `
+  })
   elSavedSection.innerHTML = strHTML.join('')
 }

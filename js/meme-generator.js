@@ -13,6 +13,16 @@ function onImgSelect(id) {
   renderMeme(getMeme())
 }
 
+function onMemeSelect(memeStr) {
+  //   console.log(memeStr)
+  const meme = JSON.parse(memeStr)
+  console.log(meme)
+  setMeme(meme)
+  hideSaved()
+  renderMeme(meme)
+  showEditor()
+}
+
 function onReturnToGallery() {
   hideEditor()
   showGallery()

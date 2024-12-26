@@ -3,6 +3,20 @@
 const gElCanvas = document.querySelector('canvas')
 const gCtx = gElCanvas.getContext('2d')
 
+const elStickers = document.querySelector('.stickers')
+// elStickers.innerHTML = getStickers().join('')
+
+function renderStickers(stickers) {
+  const elStickers = document.querySelector('.stickers')
+
+  const strHTML = stickers.map((sticker) => {
+    return `
+      <div onclick="onAddSticker('${sticker}')">${sticker}</div>
+    `
+  })
+  elStickers.innerHTML = strHTML.join('')
+}
+
 async function renderMeme(meme) {
   //paint image on canvas
 
@@ -260,4 +274,9 @@ function renderSavedMemes() {
     `
   })
   elSavedSection.innerHTML = strHTML.join('')
+}
+
+function onAddSticker(sticker) {
+  addStickerLine(sticker)
+  renderMeme(getMeme())
 }

@@ -1,5 +1,7 @@
 'use strict'
 
+const gStickers = ['😜', '😢', '🤮', '🙊', '💀', '🤡']
+
 let gMeme = {
   imgId: 5,
   selectedLineIdx: 1,
@@ -63,6 +65,25 @@ function addLine(
   line.lineIndex = newLineIndex
   gMeme.lines.push(line)
   gMeme.selectedLineIdx = newLineIndex
+}
+
+function addStickerLine(sticker) {
+  let line = {
+    txt: sticker,
+    size: 40,
+    color: 'red',
+    lineIndex: gMeme.lines.length,
+    textAlignment: 'center',
+    font: 'Arial',
+    x: 240,
+    y: 60,
+  }
+  {
+    const newLineIndex = gMeme.lines.length //new line index
+    line.lineIndex = newLineIndex
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = newLineIndex
+  }
 }
 
 function setImage(id) {
@@ -182,4 +203,8 @@ function getSavedMemes() {
 
 function loadSaveMemes() {
   console.log(gMemes)
+}
+
+function getStickers() {
+  return gStickers
 }

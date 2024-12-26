@@ -8,6 +8,8 @@ function onInit() {
 
 function onImgSelect(id) {
   hideGallery()
+  renderStickers(getStickers())
+
   showEditor()
   setImage(id)
   renderMeme(getMeme())

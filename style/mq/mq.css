@@ -18,6 +18,11 @@
 
 /* Extra small screens: 1 column */
 @media (max-width: 800px) {
+  .btn-toggle-menu {
+    position: absolute;
+    right: 15px;
+  }
+
   .image-container {
     column-count: 1;
     grid-column: 1;

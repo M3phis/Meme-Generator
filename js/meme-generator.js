@@ -28,6 +28,7 @@ function onMemeSelect(memeStr) {
 }
 
 function onReturnToGallery() {
+  defaultMeme()
   hideEditor()
   showGallery()
   hideSaved()

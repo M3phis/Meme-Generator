@@ -1,5 +1,58 @@
 'use strict'
 
+const memeTexts = [
+  {
+    txt1: "When you realize it's Monday again",
+    txt2: 'But you already want Friday',
+  },
+  { txt1: 'Me trying to adult', txt2: 'But life keeps laughing at me' },
+  { txt1: 'When your code finally works', txt2: 'But you forgot to save it' },
+  {
+    txt1: 'That moment you step on Lego',
+    txt2: 'And question every life choice',
+  },
+  { txt1: 'When your crush says hi', txt2: 'And you forget how to human' },
+  {
+    txt1: 'I came, I saw, I procrastinated',
+    txt2: "And now it's due in 5 minutes",
+  },
+  { txt1: "When mom says 'pause the game'", txt2: 'But it’s an online match' },
+  { txt1: 'That face you make', txt2: 'When you see your old cringy posts' },
+  { txt1: 'When your dog ignores you', txt2: "But you're their entire world" },
+  {
+    txt1: 'That awkward moment',
+    txt2: 'When you wave at someone not waving at you',
+  },
+  {
+    txt1: 'When you realize',
+    txt2: 'You’ve been arguing in your head for an hour',
+  },
+  {
+    txt1: 'When you check your bank account',
+    txt2: 'And see a single digit balance',
+  },
+  { txt1: 'When the WiFi goes down', txt2: 'And you have to face real life' },
+  {
+    txt1: "When you're watching a horror movie",
+    txt2: 'And you hear a noise behind you',
+  },
+  {
+    txt1: 'When you clean your room',
+    txt2: "And suddenly can't find anything",
+  },
+  { txt1: 'When you take a nap', txt2: 'And wake up in the next century' },
+  {
+    txt1: 'When someone asks for help',
+    txt2: 'And you Google the answer for them',
+  },
+  { txt1: 'When the group project is done', txt2: 'But you did all the work' },
+  { txt1: 'When you drop your phone', txt2: 'And it lands face down' },
+  {
+    txt1: 'When you hear your alarm',
+    txt2: 'And it feels like you just fell asleep',
+  },
+]
+
 const gStickers = ['😜', '😢', '🤮', '🙊', '💀', '🤡']
 
 let gMeme = {
@@ -8,9 +61,9 @@ let gMeme = {
   selectedLineIdx: 1,
   lines: [
     {
-      txt: 'I sometimes eat Falafel',
-      size: 20,
-      color: 'red',
+      txt: "When you realize it's Monday again",
+      size: 30,
+      color: 'white',
       lineIndex: 0,
       textAlignment: 'center',
       font: 'Arial',
@@ -18,14 +71,14 @@ let gMeme = {
       y: 60,
     },
     {
-      txt: 'Who am I',
+      txt: 'But you already want Friday',
       size: 30,
-      color: 'blue',
+      color: 'white',
       lineIndex: 1,
       textAlignment: 'center',
       font: 'Verdana',
       x: 240,
-      y: 130,
+      y: 430,
     },
   ],
 }
@@ -165,20 +218,31 @@ function updateLinesIndex() {
 }
 
 function getRandomMeme() {
+  const memeText = memeTexts[getRandomInt(0, memeTexts.length - 1)]
+
   return {
     imgId: getRandomInt(1, getImgs().length),
     selectedLineIdx: 0,
     lines: [
       {
-        isDrag: false,
-        txt: 'random text',
-        size: 20,
-        color: 'red',
+        txt: memeText.txt1,
+        size: 27,
+        color: 'white',
         lineIndex: 0,
         textAlignment: 'center',
         font: 'Arial',
         x: 240,
         y: 60,
+      },
+      {
+        txt: memeText.txt2,
+        size: 27,
+        color: 'white',
+        lineIndex: 1,
+        textAlignment: 'center',
+        font: 'Verdana',
+        x: 240,
+        y: 430,
       },
     ],
   }
@@ -219,4 +283,34 @@ function moveLine(dx, dy, line) {
   if (!line) return
   line.x += dx
   line.y += dy
+}
+
+function defaultMeme() {
+  gMeme = {
+    isDrag: false,
+    imgId: 5,
+    selectedLineIdx: 1,
+    lines: [
+      {
+        txt: "When you realize it's Monday again",
+        size: 30,
+        color: 'white',
+        lineIndex: 0,
+        textAlignment: 'center',
+        font: 'Arial',
+        x: 240,
+        y: 60,
+      },
+      {
+        txt: 'But you already want Friday',
+        size: 30,
+        color: 'white',
+        lineIndex: 1,
+        textAlignment: 'center',
+        font: 'Verdana',
+        x: 240,
+        y: 430,
+      },
+    ],
+  }
 }

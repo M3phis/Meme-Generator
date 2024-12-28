@@ -138,20 +138,11 @@ function drawLineFrame(line) {
   gCtx.strokeRect(frameX, frameY, frameWidth, frameHeight)
 }
 
-function cleanLine(line) {
+function deSelect() {
   // Calculate text position and dimensions
-  const textWidth = gCtx.measureText(line.txt).width
-  const x = gElCanvas.width / 2 - textWidth / 2 // Center horizontally
-  const y = 80 * (line.lineIndex + 1) // Adjust vertically based on index
-
-  const padding = 10 // Padding around the text
-  const clearX = x - padding / 2
-  const clearY = y - line.size - padding / 2
-  const clearWidth = textWidth + padding
-  const clearHeight = line.size + padding
-
-  // Clear the area of the text
-  gCtx.clearRect(clearX, clearY, clearWidth, clearHeight)
+  getMeme().selectedLineIdx = -99
+  renderMeme(getMeme())
+  console.log('rendered deselected')
 }
 
 function onSetLineTxt(txt) {
@@ -161,6 +152,9 @@ function onSetLineTxt(txt) {
 }
 
 function onDownloadImg(elLink) {
+  deSelect()
+  renderMeme(getMeme())
+  console.log('converting to data url')
   const imgContent = gElCanvas.toDataURL('image/jpeg')
   elLink.href = imgContent
 }
@@ -226,6 +220,7 @@ function onClickCanvas(event) {
     renderMeme(getMeme())
   } else {
     console.log('no line')
+    deSelect()
   }
 }
 
@@ -288,7 +283,10 @@ function onDeleteLine() {
 }
 
 function onSaveMeme() {
-  saveMeme()
+  deSelect()
+  setTimeout(() => {
+    saveMeme()
+  }, 100)
   console.log('saved memes: ', getSavedMemes())
 }
 
